@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital-Clock</title>
     <style>
-        @font-face {
-            font-family: 'Digital';
-            src: url('digital-7.ttf') format('truetype');
-        }
         body{
             background-color: rgb(240, 240, 248);
         }
@@ -24,25 +20,49 @@
         }
         .clock-screen{
             display: flex;
-            justify-content: space-evenly;
+            justify-content: center;
             text-align: center;
             background-color: black;
             border-radius: 20px;
-            font-size: 150px;
+            font-size: 130px;
             color:aqua;
-            font-family: 'Digital', monospace;
+            
         }
     </style>
 </head>
 <body>
     <div class="clock-container">
         <div class="clock-screen">
-            <div>12</div>
+            <div id="hours">12</div>
             <div>:</div>
-            <div>12</div>
+            <div id="minutes">12</div>
             <div>:</div>
-            <div>12</div>
+            <div id="seconds">12</div>
         </div>
     </div>
+    <script>
+        function digitalClock(){
+            const hourElement = document.getElementById('hours');
+            const minuteElement = document.getElementById('minutes');
+            const secondElement = document.getElementById('seconds');
+
+            const date = new Date();
+            let hours = date.getHours();
+            hours = hours>12 ? hours-12 :hours
+            hours = hours < 10 ? "0"+hours : hours;
+
+            let minutes = date.getMinutes();
+            minutes = minutes < 10 ? "0"+minutes : minutes;
+
+            let seconds = date.getSeconds();
+            seconds = seconds < 10 ? "0"+seconds : seconds;
+
+            hourElement.innerHTML = hours;
+            minuteElement.innerHTML = minutes;
+            secondElement.innerHTML = seconds;
+
+        }
+        setInterval(digitalClock, 1000);
+    </script>
 </body>
 </html>
